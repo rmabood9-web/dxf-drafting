@@ -352,11 +352,13 @@ class Kit:
 
         A number too wide for its segment is moved to the outer side of the dimension line
         (away from the measured points), where ticks and extension lines cannot strike it.
+        Where that is also the side the ordinary numbers sit on (chains above or to the left
+        of the drawing) it goes one row further out, clear of its neighbours.
         """
         p1, p2 = _v(p1), _v(p2)
         if location is None and text == "<>" and self._short(abs(p2[0] - p1[0])):
             out = 1 if y >= (p1[1] + p2[1]) / 2 else -1
-            location = ((p1[0] + p2[0]) / 2, y + out * self.mm(2.9))
+            location = ((p1[0] + p2[0]) / 2, y + out * self.mm(5.1 if out > 0 else 2.9))
         d = self.msp.add_linear_dim(
             base=(0, y), p1=_v(p1), p2=_v(p2), angle=0, text=text, dimstyle=DIMSTYLE, location=location,
             override=self._dim_override(fixed_ext), dxfattribs={"layer": self.layer(layer)},
@@ -369,7 +371,7 @@ class Kit:
         p1, p2 = _v(p1), _v(p2)
         if location is None and text == "<>" and self._short(abs(p2[1] - p1[1])):
             out = 1 if x >= (p1[0] + p2[0]) / 2 else -1
-            location = (x + out * self.mm(2.9), (p1[1] + p2[1]) / 2)
+            location = (x + out * self.mm(5.1 if out < 0 else 2.9), (p1[1] + p2[1]) / 2)
         d = self.msp.add_linear_dim(
             base=(x, 0), p1=_v(p1), p2=_v(p2), angle=90, text=text, dimstyle=DIMSTYLE, location=location,
             override=self._dim_override(fixed_ext), dxfattribs={"layer": self.layer(layer)},
