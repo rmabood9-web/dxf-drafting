@@ -20,6 +20,7 @@ import ezdxf
 from ezdxf import bbox
 
 ARABIC = re.compile(r"[؀-ۿݐ-ݿ]")
+SHAPED = re.compile("[\uFB50-\uFDFF\uFE70-\uFEFC]")  # Arabic presentation forms
 
 
 def _shape_arabic(doc) -> bool:
@@ -31,11 +32,22 @@ def _shape_arabic(doc) -> bool:
         return False
 
     def fix(s: str) -> str:
-        return get_display(arabic_reshaper.reshape(s)) if ARABIC.search(s) else s
+        # Text that already holds presentation forms has been shaped; shaping it again
+        # would put it back in the wrong order.
+        if not ARABIC.search(s) or SHAPED.search(s):
+            return s
+        return get_display(arabic_reshaper.reshape(s))
 
+    # Model and paper space are reachable both as layouts and as blocks, so remember
+    # what has been done: a second pass would reverse any line that still contains an
+    # unshaped Arabic character such as the Arabic comma.
+    seen = set()
     layouts = list(doc.layouts) + list(doc.blocks)
     for layout in layouts:
         for e in layout:
+            if id(e) in seen:
+                continue
+            seen.add(id(e))
             kind = e.dxftype()
             if kind in ("TEXT", "ATTRIB", "ATTDEF"):
                 e.dxf.text = fix(e.dxf.text)
