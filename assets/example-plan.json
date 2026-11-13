@@ -1,0 +1,65 @@
+{
+  "units": "m",
+  "scale": 100,
+  "language": "ar",
+  "wall_fill": "solid",
+  "defaults": { "wall_thickness": 0.2, "door_width": 0.9, "window_width": 1.5 },
+
+  "walls": [
+    { "id": "ext", "points": [[0, 0], [12, 0], [12, 9], [0, 9]], "closed": true, "thickness": 0.25, "reference": "outer" },
+    { "id": "p1", "points": [[5, 0.125], [5, 8.875]] },
+    { "id": "p2", "points": [[8.5, 0.125], [8.5, 8.875]] },
+    { "id": "p3", "points": [[0.125, 5], [5, 5]] },
+    { "id": "p4", "points": [[8.5, 5], [11.875, 5]] },
+    { "id": "p5", "points": [[5, 6.5], [8.5, 6.5]] }
+  ],
+
+  "doors": [
+    { "at": [6.75, 0.125], "width": 1.1, "swing_to": [6.75, 1], "hinge_near": [6, 0.125], "tag": "D1" },
+    { "at": [5, 2.5], "swing_to": [4, 2.5], "hinge_near": [5, 3.5], "tag": "D2" },
+    { "at": [5, 5.75], "swing_to": [4, 5.75], "hinge_near": [5, 5], "tag": "D2" },
+    { "at": [8.5, 2.5], "swing_to": [9.5, 2.5], "hinge_near": [8.5, 3.5], "tag": "D2" },
+    { "at": [8.5, 5.75], "swing_to": [9.5, 5.75], "hinge_near": [8.5, 5], "tag": "D2" },
+    { "at": [5.8, 6.5], "width": 0.8, "swing_to": [5.8, 7.5], "hinge_near": [5, 6.5], "tag": "D3" }
+  ],
+
+  "windows": [
+    { "at": [2.5, 0.125], "width": 2.0, "tag": "W1", "tag_to": [2.5, -1] },
+    { "at": [0.125, 2.5], "tag": "W2", "tag_to": [-1, 2.5] },
+    { "at": [2.5, 8.875], "tag": "W2", "tag_to": [2.5, 10] },
+    { "at": [10.2, 0.125], "tag": "W2", "tag_to": [10.2, -1] },
+    { "at": [10.2, 8.875], "tag": "W2", "tag_to": [10.2, 10] },
+    { "at": [6.75, 8.875], "width": 0.6, "tag": "W3", "tag_to": [6.75, 10] }
+  ],
+
+  "rooms": [
+    { "name": "مجلس", "at": [2.5, 2.4] },
+    { "name": "مطبخ", "at": [2.5, 6.7] },
+    { "name": "صالة", "at": [6.75, 3.3] },
+    { "name": "حمام", "at": [7.3, 7.2] },
+    { "name": "غرفة نوم 1", "at": [10.2, 1.6] },
+    { "name": "غرفة نوم 2", "at": [10.2, 5.9] }
+  ],
+
+  "fixtures": [
+    { "type": "sofa", "at": [2.5, 4.45], "size": [3.0, 0.9] },
+    { "type": "counter", "at": [2.575, 8.45], "size": [4.65, 0.6] },
+    { "type": "bed", "at": [10.2, 3.9], "size": [1.8, 2.0] },
+    { "type": "bed", "at": [10.2, 7.75], "size": [1.6, 2.0] },
+    { "type": "wc", "at": [5.5, 8.4], "size": [0.4, 0.7] },
+    { "type": "basin", "at": [6.4, 8.52], "size": [0.6, 0.45] },
+    { "type": "shower", "at": [7.95, 8.3], "size": [0.9, 0.9] }
+  ],
+
+  "dimensions": { "auto": true },
+
+  "sheet": {
+    "size": "auto",
+    "project": "فيلا سكنية",
+    "title": "مسقط الدور الأرضي",
+    "drawn_by": "Claude",
+    "date": "2026-11-13",
+    "number": "A-101",
+    "north": 90
+  }
+}
